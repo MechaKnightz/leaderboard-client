@@ -1,6 +1,6 @@
 FROM node:current-alpine3.12
 
-WORKDIR /client
+WORKDIR /
 
 ENV PATH /node_modules/.bin:$PATH
 
@@ -12,4 +12,6 @@ RUN npm install react-scripts
 
 COPY . ./
 
-CMD ["npm", ${RUN_COMMAND}]
+CMD ["npm", "start"]
+#CMD ["npm", "run", "dev"]
+#CMD ["npm", "run", ${RUN_COMMAND}]
