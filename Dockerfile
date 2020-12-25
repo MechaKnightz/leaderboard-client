@@ -12,4 +12,4 @@ RUN npm install react-scripts
 
 COPY . ./
 
-CMD ["npm", "start"]
+CMD ["npm", ${RUN_COMMAND}]
