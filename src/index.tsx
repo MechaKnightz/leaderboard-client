@@ -4,6 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  ApolloProvider,
+  gql,
+  useQuery
+} from '@apollo/client';
+import { cache } from './cache';
+
+// Initialize ApolloClient
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  cache,
+  uri: 'http://localhost:4000/graphql',
+  headers: {
+    authorization: localStorage.getItem('token') || '',
+  }
+});
 
 
 ReactDOM.render(
@@ -11,12 +28,12 @@ ReactDOM.render(
     domain={process.env.REACT_APP_AUTH0_DOMAIN!}
     clientId={process.env.REACT_APP_AUTH0_CLIENT_ID!}
     redirectUri={window.location.origin}
-    audience={process.env.REACT_APP_AUTH0_AUDIENCE!}
-    scope="read:current_user update:current_user_metadata"
   >
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+    <ApolloProvider client={client}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ApolloProvider>
   </Auth0Provider>,
 
   document.getElementById('root')

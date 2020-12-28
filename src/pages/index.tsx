@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Speedruns from './speedruns'
+import Speedruns from '../containers/speedruns'
 
 export default function Pages() {
   return (

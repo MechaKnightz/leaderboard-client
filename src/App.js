@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Profile from './profile'
+import Pages from './pages/index'
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <Profile></Profile>
+        <Pages></Pages>
       </header>
     </div>
   );
