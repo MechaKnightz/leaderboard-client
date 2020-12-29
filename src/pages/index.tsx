@@ -3,16 +3,20 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
-import Speedruns from '../containers/speedruns'
+import LeaderboardPage from './leaderboard-page'
+import PageContainer from '../components/page-container'
 
 export default function Pages() {
   return (
     <Fragment>
-      <Router>
-        <Route path="/" component={Speedruns}/>
-      </Router>
-    </Fragment>
+      <PageContainer>
+        <Router>
+          <Route path={["/leaderboard", "/"]} component={LeaderboardPage} />
+        </Router>
+      </PageContainer>
+    </Fragment >
   );
 }

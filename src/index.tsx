@@ -4,23 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  ApolloProvider,
-  gql,
-  useQuery
-} from '@apollo/client';
-import { cache } from './cache';
-
-// Initialize ApolloClient
-const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-  cache,
-  uri: 'http://localhost:4000/graphql',
-  headers: {
-    authorization: localStorage.getItem('token') || '',
-  }
-});
+import { ThemeProvider } from '@emotion/react'
+import GlobalStyles from './styles'
+import defaultTheme from './themes/default'
 
 
 ReactDOM.render(
@@ -28,12 +14,15 @@ ReactDOM.render(
     domain={process.env.REACT_APP_AUTH0_DOMAIN!}
     clientId={process.env.REACT_APP_AUTH0_CLIENT_ID!}
     redirectUri={window.location.origin}
+  //audience={process.env.REACT_APP_AUTH0_AUDIENCE}
+  //scope="read:current_user"
   >
-    <ApolloProvider client={client}>
+    <ThemeProvider theme={defaultTheme}>
       <React.StrictMode>
         <App />
+        <GlobalStyles />
       </React.StrictMode>
-    </ApolloProvider>
+    </ThemeProvider>
   </Auth0Provider>,
 
   document.getElementById('root')

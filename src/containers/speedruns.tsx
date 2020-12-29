@@ -53,8 +53,8 @@ const Speedruns: React.FC<SpeedrunsProps> = () => {
         <table>
           <thead>
             <tr>
-              <th>Model</th>
-              <th>Stock</th>
+              <th>ID</th>
+              <th>Description</th>
             </tr>
           </thead>
           <tbody>
