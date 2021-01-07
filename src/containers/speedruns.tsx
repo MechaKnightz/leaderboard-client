@@ -1,6 +1,4 @@
 import React, { Fragment } from 'react';
-import { InMemoryCache } from '@apollo/client';
-import { RouteComponentProps } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 
 enum SpeedrunType {
@@ -33,7 +31,7 @@ export const GET_SPEEDRUNS = gql`
 }
 `;
 
-interface SpeedrunsProps extends RouteComponentProps { }
+interface SpeedrunsProps { }
 
 const Speedruns: React.FC<SpeedrunsProps> = () => {
   const {

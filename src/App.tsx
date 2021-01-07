@@ -1,19 +1,16 @@
-import Profile from './profile'
-import Pages from './pages/index'
+import Pages from './containers/index'
 import { IdToken, useAuth0 } from "@auth0/auth0-react";
 import React, { useState, useEffect } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
   ApolloProvider,
-  gql,
-  useQuery,
   createHttpLink,
   ApolloLink
 } from '@apollo/client';
 import { cache } from './cache';
 import { setContext } from '@apollo/client/link/context';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'fontsource-roboto';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
@@ -57,7 +54,9 @@ function App() {
     link: ApolloLink.from([
       contextLink,
       httpLink
-    ])
+    ]),
+    //remove in production
+    connectToDevTools: true
   });
 
   return (

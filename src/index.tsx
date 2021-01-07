@@ -5,9 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 import { ThemeProvider } from '@emotion/react'
-import GlobalStyles from './styles'
 import defaultTheme from './themes/default'
-
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 ReactDOM.render(
   <Auth0Provider
@@ -18,10 +18,11 @@ ReactDOM.render(
   //scope="read:current_user"
   >
     <ThemeProvider theme={defaultTheme}>
-      <React.StrictMode>
-        <App />
-        <GlobalStyles />
-      </React.StrictMode>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </MuiPickersUtilsProvider>
     </ThemeProvider>
   </Auth0Provider>,
 
