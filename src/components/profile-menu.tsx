@@ -21,6 +21,7 @@ const ProfileMenu = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [username, setUserId] = useState("");
+  const [roles, setRoles] = useState([""]);
   const navigate = useNavigate();
 
   const handleClick = (event: any) => {
@@ -39,10 +40,13 @@ const ProfileMenu = () => {
     navigate(`/submit`);
   }
 
+
   getIdTokenClaims().then((res) => {
     if (res) {
       if (res.sub)
         setUserId(res.sub);
+      if(res["http://example.com/roles"])
+        setRoles(res["http://example.com/roles"]);
     }
   })
 
@@ -62,6 +66,7 @@ const ProfileMenu = () => {
         <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleSubmitClick}>Submit run</MenuItem>
+        {roles.includes("moderator") && <MenuItem onClick={() => {navigate(`/verify`);}}>Verify runs</MenuItem>}
         <Divider />
         <LogoutButton></LogoutButton>
       </Menu>

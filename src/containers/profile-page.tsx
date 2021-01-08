@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import Loading from '../components/loading';
 import ProfileInfo from '../components/profile-info';
 import ProfileTable from '../components/profile-table';
+import { SpeedrunStatus } from 'types/graphql-global-types'
 
 const useStyles = makeStyles({
   tableHeader: {
@@ -45,8 +46,8 @@ const ProfilePage: React.FC<ProfilePageProps> = (props) => {
   }
   if (!data) return <p>Not found</p>;
 
-  let verified = data.userById?.submittedRuns.filter(speedrun => speedrun?.verifier != null);
-  let unverified = data.userById?.submittedRuns.filter(speedrun => speedrun?.verifier == null);
+  let verified = data.userById?.submittedRuns.filter(speedrun => speedrun?.status == SpeedrunStatus.VERIFIED);
+  let unverified = data.userById?.submittedRuns.filter(speedrun => speedrun?.status == SpeedrunStatus.UNVERIFIED);
 
   return (
     <Paper>

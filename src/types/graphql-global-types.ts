@@ -7,6 +7,12 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum SpeedrunStatus {
+  DECLINED = "DECLINED",
+  UNVERIFIED = "UNVERIFIED",
+  VERIFIED = "VERIFIED",
+}
+
 export enum SpeedrunType {
   ANY_PERCENT = "ANY_PERCENT",
   DEATH_PERCENT = "DEATH_PERCENT",

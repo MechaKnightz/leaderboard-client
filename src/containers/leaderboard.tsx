@@ -8,8 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import prettyMilliseconds from 'pretty-ms';
-import GET_SPEEDRUNS_OF_TYPE from 'queries/getSpeedrunsOfTypeQuery';
-import { GetSpeedrunsOfType } from 'queries/types/GetSpeedrunsOfType';
+import GET_VERIFIED_SPEEDRUNS_OF_TYPE from 'queries/verifiedSpeedrunsOfTypeQuery';
+import { GetVerifiedSpeedrunsOfType } from 'queries/types/GetVerifiedSpeedrunsOfType';
 import React from 'react';
 import TimeAgo from 'react-timeago';
 import Loading from '../components/loading';
@@ -32,19 +32,19 @@ const LeaderboardRuns: React.FC<LeaderboardProps> = (props: LeaderboardProps) =>
     loading,
     error
   } = useQuery<
-    GetSpeedrunsOfType
-  >(GET_SPEEDRUNS_OF_TYPE,
+  GetVerifiedSpeedrunsOfType
+  >(GET_VERIFIED_SPEEDRUNS_OF_TYPE,
     { variables: { speedrunsOfTypeType: props.type } }
   );
 
   if (loading) return <Loading />
   if (error) return <p>ERROR: {error.message}</p>;
   if (!data) return <p>Not found</p>;
-  if (data.speedrunsOfType.length === 0) return <p>No entries</p>;
+  if (data.verifiedSpeedrunsOfType.length === 0) return <p>No entries</p>;
 
   return (
     <Container>
-      { data.speedrunsOfType.length > 0 ?
+      { data.verifiedSpeedrunsOfType.length > 0 ?
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -55,13 +55,13 @@ const LeaderboardRuns: React.FC<LeaderboardProps> = (props: LeaderboardProps) =>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.speedrunsOfType.map((speedrun, i) => (
+            {data.verifiedSpeedrunsOfType.map((speedrun, i) => (
               <TableRow key={speedrun?.id}>
                 <TableCell><Typography>{i}</Typography></TableCell>
                 { speedrun?.submitter && <TableCell>
                   <ProfileLink id={speedrun?.submitter.id} name={speedrun?.submitter.name} />
                 </TableCell>}
-                { speedrun?.time && <TableCell><Typography>{prettyMilliseconds(speedrun.time, { keepDecimalsOnWholeSeconds: true })}</Typography></TableCell>}
+                { speedrun?.time && <TableCell><Typography>{prettyMilliseconds(speedrun.time, { separateMilliseconds: true })}</Typography></TableCell>}
                 { speedrun?.date && <TableCell><Typography><TimeAgo date={speedrun.date} /></Typography></TableCell>}
               </TableRow>
             ))}

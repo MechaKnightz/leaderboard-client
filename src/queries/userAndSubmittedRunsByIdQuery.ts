@@ -13,6 +13,7 @@ query UserAndSubmittedRunsById($submittedRunsByIdId: ID!) {
       type
       description
       url
+      status
       verifier {
         name
         id

@@ -40,7 +40,7 @@ function App() {
               authorization: res.__raw
             }});
           }
-          fail("error")
+          success(null);
         })
         setTimeout(() => {
           fail("timeout");

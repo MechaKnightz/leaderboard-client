@@ -16,6 +16,11 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  message: {
+    marginLeft: "1em",
+    marginTop: "0.5em",
+    marginBottom: "0.5em"
+  }
 });
 
 
@@ -45,14 +50,14 @@ const ProfileTable: React.FC<ProfileTableProps> = (props: ProfileTableProps) => 
                   { speedrun?.verifier && <TableCell>
                     <ProfileLink id={speedrun?.verifier.id} name={speedrun?.verifier.name} />
                   </TableCell>}
-                  { speedrun?.time && <TableCell><Typography>{prettyMilliseconds(speedrun.time, { keepDecimalsOnWholeSeconds: true })}</Typography></TableCell>}
+                  { speedrun?.time && <TableCell><Typography>{prettyMilliseconds(speedrun.time, { separateMilliseconds: true })}</Typography></TableCell>}
                   { speedrun?.date && <TableCell><Typography><TimeAgo date={speedrun.date} /></Typography></TableCell>}
                 </TableRow>
               ))}
             </TableBody>
           </Table>
           :
-          <Typography>No data available</Typography>
+          <Typography className={classes.message}>No data available</Typography>
       }
     </Container>
   );
